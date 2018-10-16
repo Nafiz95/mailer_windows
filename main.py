@@ -7,6 +7,7 @@ def main():
     from netSurfer import search 
     from linkCollector import getLinks
     from emailActivityChecker import checkActivity
+    from emailCollector import getEmails
 
     print("""
             Welcome To The Mailer
@@ -20,6 +21,7 @@ def main():
         return
     
     wait = input("PRESS ENTER TO CONTINUE.")
+    
     os.system('cls' if os.name == 'nt' else 'clear')
     
     #Search Internet for keyword(s) and Get links
@@ -30,5 +32,18 @@ def main():
         print("Oops!! Noting Found!")
         wait = input("PRESS ENTER TO EXIT.")
         return
-    print(links)
+    email_list=[]
+    link_counter=1
+    print(str(len(links))+" Links Found")
+    print("Searching Each Link ...")
+    
+    for link in links:
+        print("Link No. "+ str(link_counter))
+        link_counter = link_counter + 1
+        email_list = email_list + getEmails(link)
+    
+    
+    email_list= list(set(email_list))
+    print(email_list)
+
 main()

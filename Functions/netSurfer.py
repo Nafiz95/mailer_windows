@@ -4,7 +4,7 @@ def search(query_string_input):
     query_string = query_string_input.replace(' ','+')
     query_string = "https://www.google.com/search?q="+query_string
 
-    chrome_path= r"E:\mailer_windows/chromedriver"
+    chrome_path= r"./chromedriver.exe"
     driver=webdriver.Chrome(chrome_path)
     
     driver.set_window_size(0,0)

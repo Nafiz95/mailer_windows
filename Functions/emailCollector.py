@@ -1,20 +1,20 @@
-def getEmails(link = "https://www.randomlists.com/email-addresses"): 
+def getEmails(link): 
     from selenium import webdriver
+    import re
+
     
     #Go to the link
-    chrome_path= r"E:\mailer_windows/chromedriver"
+    chrome_path= r"./chromedriver_linux64/chromedriver"
     driver=webdriver.Chrome(chrome_path)
     driver.set_window_size(0,0)
     driver.set_window_position(15000,15000)
-    driver.get(link) 
-    respond = driver.execute_script("return document.documentElement.outerHTML")
+    try:
+        driver.get(link) 
+        respond = driver.execute_script("return document.documentElement.outerHTML")
+    except:
+        respond = ""
     driver.quit()
     
+    email_list=re.findall(r'[\w\.-]+@[\w\.-]+', respond)
     
-    #Search for Mail
-    mail_list=[]
-    print(respond)
-    #If eamil
-    #push to mail_list
-    #return mail_list 
-getEmails()
+    return email_list
